@@ -51,5 +51,36 @@ function remove_php_from_file($file_path)
     return $cleaned_content;
 }
 
-// TODO: prevent unnecessary templates from being loaded.
+// // TODO: prevent unnecessary templates from being loaded.
+// // This doesn't work.
+// add_action('wp_loaded', function () {
+//     global $wp_block_templates;
+//     error_log(print_r($wp_block_templates, true));
+//     error_log('happening234');
+
+//     $templates_to_unregister = [
+//         '404',
+//         'archive-product',
+//         'archive',
+//         'blank',
+//         'cart',
+//         'checkout',
+//         'front-page',
+//         'fullwidth-page-template',
+//         'home',
+//         'index',
+//         'page-leftsidebar-template',
+//         'page-sitemap-template',
+//         'page',
+//         'search',
+//         'single-fullwith-template',
+//         'single-leftsidebar-template',
+//         'single-product',
+//         'single',
+//     ];
+
+//     foreach ($templates_to_unregister as $template) {
+//         unregister_block_template('mighty-builders//' . $template);
+//     }
+// }, 90);
 ?>
