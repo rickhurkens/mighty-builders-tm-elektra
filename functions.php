@@ -12,19 +12,28 @@ add_action('wp_enqueue_scripts', 'child_theme_enqueue_styles');
 
 
 add_action('after_setup_theme', function () {
-    // Unregister the parent theme's footer-default pattern
-    unregister_block_pattern('mighty-builders/footer-default');
+    $patterns_to_overwrite = [
+        'footer-default' => ['Footer Default', 'footer'],
+        'header-default' => ['Header Default', 'header'],
+    ];
 
-    // Register your child theme's footer-default pattern
-    register_block_pattern(
-        'mighty-builders/footer-default',
-        array(
-            'title' => __('Footer Default', 'mighty-builders-tm-elektra'),
-            'description' => __('The default footer pattern, customized by the child theme.'),
-            'categories' => array('mighty-builders', 'footer'),
-            'content' => remove_php_from_file(get_stylesheet_directory() . '/patterns/footer-default.php'),
-        )
-    );
+    foreach ($patterns_to_overwrite as $pattern_slug => $values) {
+        list($pattern_title, $category) = $values;
+
+        // Unregister the parent theme's pattern
+        unregister_block_pattern('mighty-builders/' . $pattern_slug);
+
+        // Register your child theme's pattern
+        register_block_pattern(
+            'mighty-builders/' . $pattern_slug,
+            array(
+                'title' => __($pattern_title, 'mighty-builders-tm-elektra'),
+                'description' => __('The default ' . $pattern_title . ' pattern, customized by the child theme.'),
+                'categories' => array('mighty-builders', $category),
+                'content' => remove_php_from_file(get_stylesheet_directory() . '/patterns/' . $pattern_slug . '.php'),
+            )
+        );
+    }
 });
 
 
