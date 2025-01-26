@@ -1,0 +1,252 @@
+// Electrician data for each page
+// https://schema.org/Electrician
+
+{
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "<< bedrijfsnaam >>",
+  "url": "https://tm-elektra.nl",
+  "logo": "<? url naar logo ?>",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "<< straatnaam + huisnummer >>",
+    "addressLocality": "Utrecht",
+    "addressRegion": "Utrecht",
+    "postalCode": "<< postcode >>",
+    "addressCountry": "NL"
+  },
+  "telephone": "<< telefoonnummer (format: +31612345678)>>",
+  "email": "<< emailadres >>",
+  "openingHours": "<< openingstijden (format: Mo-Fr 08:00-18:00) >>",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": << latitude (zonder quotes) >>,
+    "longitude": << longitude (zonder quotes) >>
+  },
+  "priceRange": "$$",
+  "sameAs": [
+    << links naar andere online profielen, gescheiden door komma's, zoals:
+      "https://facebook.com/yourbusiness",
+      "https://twitter.com/yourbusiness"
+    >>
+  ]
+}
+
+
+
+// Home page / over mij page
+
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      <? overnemen van global electrician data ?>
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "<< Utrecht >>"
+        },
+        {
+          "@type": "Place",
+          "name": "<< andere stad, dit blokje kopiëren voor iedere plaats (vanaf `{` tot `}`) >>"
+        }
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "<< Elektrische reparaties >>",
+            "description": "<< Het repararen van elektrische systemen in uw huis >>"
+          }
+        },
+        {
+          << dit hele blokje weer kopiëren voor iedere dienst >>
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "<< .. >>",
+            "description": "<< .. >>"
+          }
+        }
+      ],
+      "brand": [
+        << alleen als je denkt dat je hiermee klanten gaat trekken vanuit google omdat zij specifiek op een merk zoeken >>
+        {
+          "@type": "Brand",
+          "name": "<< Merknaam >>",
+          "url": "<< eventueel website van merk >>"
+        },
+        {
+          << dit hele blokje weer kopiëren voor iedere dienst >>
+          "@type": "Brand",
+          "name": "<< .. >>",
+          "url": "<< .. >>"
+        }
+      ],
+      "aggregateRating": {
+        <? dynamisch inladen ?>
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "120"
+      },
+      "review": [
+        <? dynamisch opbouwen ?>
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jane Doe"
+          },
+          "reviewBody": "Excellent service and prompt response. Highly recommend!",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "John Smith"
+          },
+          "reviewBody": "Professional and thorough, fixed my issue quickly.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "4.5"
+          }
+        }
+      ],
+      <? alleen toevoegen wanneer we certifications gaan tonen ?>
+      "hasCertification": { <? of hasCredentials? ?>
+        "@type": "Certification",
+        "name": "Certified Master Electrician",
+        "issuedBy": {
+          "@type": "Organization",
+          "name": "National Electrical Association",
+          "url": "https://nea.org"
+        }
+      }
+    },
+    {
+      <? dynamisch opbouwen op iedere pagina ?>
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://yourbusinesswebsite.com"
+        }
+      ]
+    }
+  ]
+}
+
+
+// Breadcrumblist dynamisch opbouwen voor iedere pagina:
+{
+  <? dynamisch opbouwen op iedere pagina ?>
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://yourbusinesswebsite.com"
+    }
+  ]
+}
+
+
+// Service page:
+
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      <? zie default ?>
+    },
+    {
+      "@type": "Service",
+      "name": "Electrical Wiring Installation",
+      "description": "Professional installation of electrical wiring systems for residential and commercial properties.",
+      "url": "https://yourbusinesswebsite.com/service/wiring-installation",
+      "provider": {
+        "@type": "Electrician",
+        "name": "Your Business Name",
+        "url": "https://yourbusinesswebsite.com"
+      },
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "Your City"
+        },
+        {
+          "@type": "Place",
+          "name": "Neighboring City"
+        }
+      ]
+    }
+  ]
+}
+
+
+// Article page
+
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "5 Signs Your Home Needs Electrical Repairs",
+  "author": {
+    "@type": "Person",
+    "name": "Your Name"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Your Business Name",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yourbusinesswebsite.com/logo.png"
+    }
+  },
+  "datePublished": "2025-01-25",
+  "dateModified": "2025-01-26",
+  "image": "https://yourbusinesswebsite.com/article-image.jpg",
+  "mainEntityOfPage": "https://yourbusinesswebsite.com/blog/5-signs-electrical-repairs",
+  "description": "Learn the top signs your home needs electrical repairs, including flickering lights, tripped breakers, and unusual odors."
+}
+
+
+// FAQ page
+
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What services do you offer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer a range of electrical services including wiring installation, repairs, and maintenance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer emergency services?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we provide 24/7 emergency electrician services."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are your electricians certified?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, all our electricians are certified and highly trained professionals."
+      }
+    }
+  ]
+}
