@@ -7,8 +7,18 @@ function child_theme_enqueue_styles()
 
     // Load child theme styles
     wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', array('parent-style'));
+    wp_enqueue_style('mighty-builders-tm-elektra-blocks-style', get_stylesheet_directory_uri() . '/assets/css/blocks.css');
 }
 add_action('wp_enqueue_scripts', 'child_theme_enqueue_styles');
+
+/**
+ * Enqueue assets scripts for both backend and frontend
+ */
+function mighty_builders_tm_elektra_block_assets()
+{
+    wp_enqueue_style('mighty-builders-tm-elektra-blocks-style', get_template_directory_uri() . '/assets/css/blocks.css');
+}
+add_action('enqueue_block_assets', 'mighty_builders_block_assets');
 
 
 add_action('after_setup_theme', function () {
