@@ -29,13 +29,16 @@ add_action('after_setup_theme', function () {
 
     foreach ($patterns_to_overwrite as $pattern_slug => $values) {
         list($pattern_title, $category) = $values;
+        $full_pattern_slug = 'mighty-builders/' . $pattern_slug;
 
-        // Unregister the parent theme's pattern
-        unregister_block_pattern('mighty-builders/' . $pattern_slug);
+        if (WP_Block_Patterns_Registry::get_instance()->is_registered($full_pattern_slug)) {
+            unregister_block_pattern($full_pattern_slug);
+        }
 
-        // Register your child theme's pattern
+        // Register your child theme's pattern 
+        // (using mighty-builders as the namespace is intended because we are overwriting the parent theme's pattern)
         register_block_pattern(
-            'mighty-builders/' . $pattern_slug,
+            $full_pattern_slug,
             array(
                 'title' => __($pattern_title, 'mighty-builders-tm-elektra'),
                 'description' => __('The default ' . $pattern_title . ' pattern, customized by the child theme.'),
